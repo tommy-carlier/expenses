@@ -27,12 +27,13 @@ function renderCategory(c){
     name = d.createElement('SPAN'),
     amount = d.createElement('SPAN');
   
-  name.className = 'name';
+  name.className = 'name fill';
   name.appendChild(d.createTextNode(c.name));
   
   amount.className = 'amount';
   amount.appendChild(d.createTextNode(c.amount));
   
+  item.className = 'row';
   item.appendChild(name);
   item.appendChild(amount);
   
