@@ -1,7 +1,9 @@
 (function(){
 "use strict";
 
-var categories = [], d = document, categoriesElement = d.getElementById('categories');
+var categories = [], d = document,
+  totalElement = d.getElementById('total'),
+  categoriesElement = d.getElementById('categories');
 
 function load(){
   if (window.localStorage && window.JSON){
@@ -44,11 +46,20 @@ function renderCategory(c){
 }
 
 function renderCategories(){
-  var list = d.createElement('UL');
+  var list = d.createElement('UL'), total = 0.0;
   for (var i = 0, n = categories.length; i < n; i++){
-    list.appendChild(renderCategory(categories[i]));
+    var c = categories[i];
+    total += c.amount;
+    list.appendChild(renderCategory(c));
   }
+  
   categoriesElement.replaceChild(list, categoriesElement.firstChild);
+  if (totalElement.hasChildNodes()){
+    totalElement.removeChild(totalElement.firstChild);
+  }
+  if (~~total){
+    totalElement.appendChild(d.createTextNode(' (' + total.toFixed(2) + ')'));
+  }
 }
 
 function update(){

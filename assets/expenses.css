@@ -6,6 +6,8 @@ body { color:#000; background:#FFF }
 h1 { font-size: 16pt; text-align:center }
 button { padding:0.1em 0.8em }
 
+#total { font-weight:normal }
+
 .screen { display:table; max-width:800px; margin:0 auto }
 .screen header, .screen main, .screen footer { display:table-row }
 .screen main { height:100% }
