@@ -61,6 +61,13 @@ function getIndex(e){
   return i;
 }
 
+function parseExpense(s){
+	if (/\d+(?:[.,]\d+)?/.test(s)){
+		return parseFloat(s.replace(',', '.'));
+	}
+	return NaN;
+}
+
 function onAddExpense(e){
   var t = e.target;
   if (t.tagName == 'SPAN'){
@@ -68,8 +75,8 @@ function onAddExpense(e){
   }
   if (t.tagName == 'LI'){
     var i = getIndex(t), c = categories[i];
-    var expense = parseFloat(prompt(c.name + ': ' + c.amount.toString() + ' + ?'), 10);
-    if (!Number.isNaN(expense)){
+    var expense = parseExpense(prompt(c.name + ': ' + c.amount.toString() + ' + ?'));
+    if (!isNaN(expense)){
       c.amount += expense;
       update();
     }
@@ -79,7 +86,7 @@ function onAddExpense(e){
 function onAddCategory(){
   var name = prompt('What is the name of the category?');
   if (name){
-    categories.push({ name: name, amount: 0 });
+    categories.push({ name: name, amount: 0.0 });
     update();
   }
 }
@@ -87,7 +94,7 @@ function onAddCategory(){
 function onClearExpenses(){
   if (confirm('Are you sure you want to clear all expenses?')){
     for (var i = 0, n = categories.length; i < n; i++){
-      categories[i].amount = 0;
+      categories[i].amount = 0.0;
     }
     update();
   }
