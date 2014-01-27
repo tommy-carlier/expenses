@@ -31,7 +31,7 @@ function renderCategory(c){
   name.appendChild(d.createTextNode(c.name));
   
   amount.className = 'amount';
-  amount.appendChild(d.createTextNode(c.amount));
+  amount.appendChild(d.createTextNode(c.amount.toFixed(2)));
   
   item.appendChild(name);
   item.appendChild(amount);
