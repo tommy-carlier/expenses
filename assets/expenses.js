@@ -105,6 +105,10 @@ function onAddCategory(){
   }
 }
 
+function onEditCategories(){
+  alert('Editing categories is not implemented yet. Sorry.');
+}
+
 function onClearExpenses(){
   if (confirm('Are you sure you want to clear all expenses?')){
     for (var i = 0, n = categories.length; i < n; i++){
@@ -119,6 +123,7 @@ renderCategories();
 
 categoriesElement.addEventListener('click', onAddExpense);
 d.getElementById('add-category').addEventListener('click', onAddCategory);
+d.getElementById('edit-categories').addEventListener('click', onEditCategories);
 d.getElementById('clear-expenses').addEventListener('click', onClearExpenses);
 
 }())
