@@ -11,6 +11,8 @@ button { padding:0.1em 0.8em }
 .screen { display:table; max-width:800px; margin:0 auto }
 .screen header, .screen main, .screen footer { display:table-row }
 .screen main { height:100% }
+.screen footer { text-align:center }
+.screen footer button { margin:0.5em }
 
 #categories ul { display:table; width:100% }
 #categories li { display:table-row }
@@ -18,6 +20,3 @@ button { padding:0.1em 0.8em }
 #categories .name { padding:0 0 0 1em; color:#666 }
 #categories .amount { text-align:right; white-space:nowrap; padding:0 1em }
 #categories .empty .amount { color:#CCC }
-
-.left { float:left }
-.right { float:right }
