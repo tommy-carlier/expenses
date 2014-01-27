@@ -1,8 +1,12 @@
 CACHE MANIFEST
-#201401271607
+#201401271650
 
+CACHE:
 index.html
 expenses.html
 assets/expenses.css
 assets/expenses.js
 assets/expenses.png
+
+NETWORK:
+*
