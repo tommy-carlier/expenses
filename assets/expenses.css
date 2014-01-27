@@ -1,6 +1,11 @@
 html, body, .screen { margin:0; width:100%; height:100% }
 h1, ul, li { margin:0; padding:0 }
 
+body, button { font:normal 16pt/170% 'Avenir','Segoe UI',sans-serif }
+body { color:#000; background:#FFF }
+h1 { font-size: 16pt; text-align:center }
+button { padding:0.1em 0.8em }
+
 .screen { display:table; max-width:800px; margin:0 auto }
 .screen header, .screen main, .screen footer { display:table-row }
 .screen main { height:100% }
@@ -8,6 +13,8 @@ h1, ul, li { margin:0; padding:0 }
 #categories ul { display:table; width:100% }
 #categories li { display:table-row }
 #categories span { display:table-cell }
+#categories .empty .name { color:#666 }
+#categories .empty .amount { color:#CCC }
 #categories .name {  }
 #categories .amount { text-align:right; white-space:nowrap }
 
