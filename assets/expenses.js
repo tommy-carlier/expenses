@@ -32,6 +32,10 @@ function renderCategory(c){
   
   amount.className = 'amount';
   amount.appendChild(d.createTextNode(c.amount.toFixed(2)));
+
+  if (!~~c.amount){ // check if c.amount is zero
+    item.className = 'empty';
+  }
   
   item.appendChild(name);
   item.appendChild(amount);
@@ -61,10 +65,10 @@ function getIndex(e){
 }
 
 function parseExpense(s){
-	if (/\d+(?:[.,]\d+)?/.test(s)){
-		return parseFloat(s.replace(',', '.'));
-	}
-	return NaN;
+  if (/\d+(?:[.,]\d+)?/.test(s)){
+    return parseFloat(s.replace(',', '.'));
+  }
+  return NaN;
 }
 
 function onAddExpense(e){
