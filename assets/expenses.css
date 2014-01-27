@@ -14,7 +14,7 @@ button { font-size:14pt }
 .screen footer { text-align:center }
 .screen footer button { margin:0.5em }
 
-#categories ul { display:table; width:100%; font-size:18pt; line-height:180% }
+#categories ul { display:table; width:100% }
 #categories li { display:table-row }
 #categories li:hover { background:#F8F8F8 }
 #categories span { display:table-cell }
