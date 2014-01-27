@@ -15,10 +15,9 @@ button { padding:0.1em 0.8em }
 #categories ul { display:table; width:100% }
 #categories li { display:table-row }
 #categories span { display:table-cell }
-#categories .empty .name { color:#666 }
-#categories .empty .amount { color:#CCC }
-#categories .name { padding:0 0 0 1em }
+#categories .name { padding:0 0 0 1em; color:#666 }
 #categories .amount { text-align:right; white-space:nowrap; padding:0 1em }
+#categories .empty .amount { color:#CCC }
 
 .left { float:left }
 .right { float:right }
