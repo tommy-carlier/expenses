@@ -24,6 +24,17 @@ function save(){
   }
 }
 
+function parseAmount(s){
+  if (/\d+(?:[.,]\d+)?/.test(s)){
+    return parseFloat(s.replace(',', '.'));
+  }
+  return NaN;
+}
+
+function formatAmount(a){
+  return a.toFixed(2);
+}
+
 function renderCategory(c){
   var item = d.createElement('LI'),
     name = d.createElement('SPAN'),
@@ -33,7 +44,7 @@ function renderCategory(c){
   name.appendChild(d.createTextNode(c.name));
   
   amount.className = 'amount';
-  amount.appendChild(d.createTextNode(c.amount.toFixed(2)));
+  amount.appendChild(d.createTextNode(formatAmount(c.amount)));
 
   if (!~~c.amount){ // check if c.amount is zero
     item.className = 'empty';
@@ -58,7 +69,7 @@ function renderCategories(){
     totalElement.removeChild(totalElement.firstChild);
   }
   if (~~total){
-    totalElement.appendChild(d.createTextNode(' (' + total.toFixed(2) + ')'));
+    totalElement.appendChild(d.createTextNode(' (' + formatAmount(total) + ')'));
   }
 }
 
@@ -75,13 +86,6 @@ function getIndex(e){
   return i;
 }
 
-function parseExpense(s){
-  if (/\d+(?:[.,]\d+)?/.test(s)){
-    return parseFloat(s.replace(',', '.'));
-  }
-  return NaN;
-}
-
 function onAddExpense(e){
   var t = e.target;
   if (t.tagName == 'SPAN'){
@@ -89,7 +93,7 @@ function onAddExpense(e){
   }
   if (t.tagName == 'LI'){
     var i = getIndex(t), c = categories[i];
-    var expense = parseExpense(prompt(c.name + ': ' + c.amount.toString() + ' + ?'));
+    var expense = parseAmount(prompt(c.name + ': ' + formatAmount(c.amount) + ' + ?'));
     if (!isNaN(expense)){
       c.amount += expense;
       update();
