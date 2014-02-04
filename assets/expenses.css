@@ -4,7 +4,7 @@ h1, ul, li { margin:0; padding:0 }
 body, button, input { font:normal 16pt/170% 'Avenir','Segoe UI',sans-serif }
 body { color:#000; background:#FFF }
 h1 { font-size:14pt; text-align:center }
-button, input { font-size:13pt }
+button { font-size:13pt }
 
 input+button { margin-left:0.5em }
 
@@ -27,6 +27,6 @@ input+button { margin-left:0.5em }
 #categories .amount { text-align:right; white-space:nowrap; padding:0 1em }
 #categories .empty .amount { color:#CCC }
 
-#add-expense-screen main { text-align:center }
+#add-expense-screen main { text-align:center; vertical-align:middle }
 #add-expense-current { color:#666 }
 #add-expense-amount { background:none; border:none; border-bottom:dashed 1px #666; outline:none; width:6em }

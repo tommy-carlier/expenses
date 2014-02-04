@@ -140,6 +140,7 @@ function onSubmitAddExpenseForm(e){
     categories[current].amount += expense;
     update();
   }
+  addExpenseAmountElement.blur();
   showScreen('main');
 }
 
