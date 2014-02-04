@@ -1,9 +1,12 @@
 (function(){
 "use strict";
 
-var categories = [], d = document,
+var categories = [], d = document, current = -1,
   totalElement = d.getElementById('total'),
-  categoriesElement = d.getElementById('categories');
+  categoriesElement = d.getElementById('categories'),
+  addExpenseHeader = d.getElementById('add-expense-header'),
+  addExpenseCurrentElement = d.getElementById('add-expense-current'),
+  addExpenseAmountElement = d.getElementById('add-expense-amount');
 
 function load(){
   if (window.localStorage && window.JSON){
@@ -78,6 +81,10 @@ function update(){
   save();
 }
 
+function showScreen(s){
+  d.body.setAttribute('data-screen', s);
+}
+
 function getIndex(e){
   var i = 0;
   while ((e = e.previousSibling) != null){
@@ -86,18 +93,22 @@ function getIndex(e){
   return i;
 }
 
+function showAddExpenseScreen(c){
+  addExpenseHeader.firstChild.textContent = c.name;
+  addExpenseCurrentElement.firstChild.textContent = formatAmount(c.amount);
+  addExpenseAmountElement.value = '';
+  showScreen('add-expense');
+  addExpenseAmountElement.focus();
+}
+
 function onAddExpense(e){
   var t = e.target;
   if (t.tagName == 'SPAN'){
     t = t.parentElement;
   }
   if (t.tagName == 'LI'){
-    var i = getIndex(t), c = categories[i];
-    var expense = parseAmount(prompt(c.name + ': ' + formatAmount(c.amount) + ' + ?'));
-    if (!isNaN(expense)){
-      c.amount += expense;
-      update();
-    }
+    current = getIndex(t);
+    showAddExpenseScreen(categories[current]);
   }
 }
 
@@ -122,6 +133,16 @@ function onClearExpenses(){
   }
 }
 
+function onSubmitAddExpenseForm(e){
+  e.preventDefault();
+  var expense = parseAmount(addExpenseAmountElement.value);
+  if (!isNaN(expense)){
+    categories[current].amount += expense;
+    update();
+  }
+  showScreen('main');
+}
+
 load();
 renderCategories();
 
@@ -129,5 +150,6 @@ categoriesElement.addEventListener('click', onAddExpense);
 d.getElementById('add-category').addEventListener('click', onAddCategory);
 d.getElementById('edit-categories').addEventListener('click', onEditCategories);
 d.getElementById('clear-expenses').addEventListener('click', onClearExpenses);
+d.getElementById('add-expense-screen').addEventListener('submit', onSubmitAddExpenseForm);
 
 }())
