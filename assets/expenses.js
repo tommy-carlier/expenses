@@ -144,6 +144,11 @@ function onSubmitAddExpenseForm(e){
   showScreen('main');
 }
 
+function onBackToMainScreen(e){
+  e.preventDefault();
+  showScreen('main');
+}
+
 load();
 renderCategories();
 
@@ -152,5 +157,6 @@ d.getElementById('add-category').addEventListener('click', onAddCategory);
 d.getElementById('edit-categories').addEventListener('click', onEditCategories);
 d.getElementById('clear-expenses').addEventListener('click', onClearExpenses);
 d.getElementById('add-expense-screen').addEventListener('submit', onSubmitAddExpenseForm);
+d.querySelector('#add-expense-screen button.back').addEventListener('click', onBackToMainScreen);
 
 }())
