@@ -4,6 +4,7 @@
 var categories = [], d = document, current = -1,
   totalElement = d.getElementById('total'),
   categoriesElement = d.querySelector('#main-screen main'),
+  editCategoriesElement = d.querySelector('#edit-categories-screen main'),
   addExpenseHeader = d.querySelector('#add-expense-screen header h1'),
   addExpenseCurrentElement = d.getElementById('add-expense-current'),
   addExpenseAmountElement = d.getElementById('add-expense-amount');
@@ -120,8 +121,35 @@ function onAddCategory(){
   }
 }
 
+function renderEditCategory(c){
+  var item = d.createElement('LI'),
+    name = d.createElement('INPUT'),
+    deleteButton = d.createElement('BUTTON');
+  
+  name.value = c.name;
+  
+  deleteButton.className = 'delete';
+  deleteButton.appendChild(d.createTextNode('Delete'));
+  
+  item.appendChild(name);
+  item.appendChild(deleteButton);
+  
+  return item;
+}
+
+function renderEditCategories(){
+  var list = d.createElement('UL');
+  for (var i = 0, n = categories.length; i < n; i++){
+    var c = categories[i];
+    list.appendChild(renderEditCategory(c));
+  }
+  
+  editCategoriesElement.replaceChild(list, editCategoriesElement.firstChild);
+}
+
 function onEditCategories(){
-  alert('Editing categories is not implemented yet. Sorry.');
+  renderEditCategories();
+  showScreen('edit-categories');
 }
 
 function onClearExpenses(){
@@ -144,6 +172,12 @@ function onSubmitAddExpenseForm(e){
   showScreen('main');
 }
 
+function onSubmitEditCategoriesForm(e){
+  e.preventDefault();
+  alert('Editing categories is not implemented yet. Sorry.');
+  showScreen('main');
+}
+
 function onBackToMainScreen(e){
   e.preventDefault();
   showScreen('main');
@@ -152,11 +186,17 @@ function onBackToMainScreen(e){
 load();
 renderCategories();
 
+// event handlers
 categoriesElement.addEventListener('click', onAddExpense);
+
 d.getElementById('add-category').addEventListener('click', onAddCategory);
 d.getElementById('edit-categories').addEventListener('click', onEditCategories);
 d.getElementById('clear-expenses').addEventListener('click', onClearExpenses);
+
 d.getElementById('add-expense-screen').addEventListener('submit', onSubmitAddExpenseForm);
 d.querySelector('#add-expense-screen button.back').addEventListener('click', onBackToMainScreen);
+
+d.getElementById('edit-categories-screen').addEventListener('submit', onSubmitEditCategoriesForm);
+d.querySelector('#edit-categories-screen button.back').addEventListener('click', onBackToMainScreen);
 
 }())

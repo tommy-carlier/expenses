@@ -20,16 +20,21 @@ button.back { left:0; border:none; background:none }
 .screen footer button { margin:0.5em }
 
 [data-screen=main] #main-screen,
-[data-screen=add-expense] #add-expense-screen { display:table }
+[data-screen=add-expense] #add-expense-screen,
+[data-screen=edit-categories] #edit-categories-screen { display:table }
 
-#main-screen main ul { display:table; width:100% }
-#main-screen main li { display:table-row }
-#main-screen main li:hover { background:#F8F8F8 }
-#main-screen main span { display:table-cell }
-#main-screen main .name { padding:0 0 0 1em; color:#666 }
-#main-screen main .amount { text-align:right; white-space:nowrap; padding:0 1em }
-#main-screen main .empty .amount { color:#CCC }
+#main-screen ul { display:table; width:100% }
+#main-screen li { display:table-row }
+#main-screen li:hover { background:#F8F8F8 }
+#main-screen li span { display:table-cell }
+#main-screen li .name { padding:0 0 0 1em; color:#666 }
+#main-screen li .amount { text-align:right; white-space:nowrap; padding:0 1em }
+#main-screen li.empty .amount { color:#CCC }
 
 #add-expense-screen main { text-align:center; vertical-align:middle }
 #add-expense-current { color:#666 }
 #add-expense-amount { background:none; border:none; border-bottom:dashed 1px #666; outline:none; width:6em }
+
+#edit-categories-screen li { display:block; position:relative; height:1.7em }
+#edit-categories-screen input { position:absolute; left:1em; top:0; border:none; background:none }
+#edit-categories-screen .delete { position:absolute; right:0; top:0 }
