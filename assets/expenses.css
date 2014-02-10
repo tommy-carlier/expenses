@@ -19,13 +19,13 @@ input+button { margin-left:0.5em }
 [data-screen=main] #main-screen,
 [data-screen=add-expense] #add-expense-screen { display:table }
 
-#categories ul { display:table; width:100% }
-#categories li { display:table-row }
-#categories li:hover { background:#F8F8F8 }
-#categories span { display:table-cell }
-#categories .name { padding:0 0 0 1em; color:#666 }
-#categories .amount { text-align:right; white-space:nowrap; padding:0 1em }
-#categories .empty .amount { color:#CCC }
+#main-screen main ul { display:table; width:100% }
+#main-screen main li { display:table-row }
+#main-screen main li:hover { background:#F8F8F8 }
+#main-screen main span { display:table-cell }
+#main-screen main .name { padding:0 0 0 1em; color:#666 }
+#main-screen main .amount { text-align:right; white-space:nowrap; padding:0 1em }
+#main-screen main .empty .amount { color:#CCC }
 
 #add-expense-screen main { text-align:center; vertical-align:middle }
 #add-expense-current { color:#666 }

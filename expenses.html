@@ -7,19 +7,22 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="apple-touch-icon-precomposed" href="assets/expenses.png">
 </head><body data-screen="main">
+
 <div id="main-screen" class="screen">
   <header><h1>Expenses<span id="total"></span></h1></header>
-  <main id="categories"><ul></ul></main>
+  <main><ul></ul></main>
   <footer>
     <button id="add-category">Add</button>
     <button id="edit-categories">Edit</button>
     <button id="clear-expenses">Clear</button>
   </footer>
 </div>
+
 <form id="add-expense-screen" class="screen">
-  <header><h1 id="add-expense-header">-</h1></header>
+  <header><h1>-</h1></header>
   <main>
     <span id="add-expense-current">0.00</span> + <input type="number" id="add-expense-amount" step="0.01"> <button type="submit" id="add-expense">Add</button>
   </main>
 </form>
+
 <script src="assets/expenses.js"></script></body></html>

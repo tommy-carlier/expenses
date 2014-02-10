@@ -3,8 +3,8 @@
 
 var categories = [], d = document, current = -1,
   totalElement = d.getElementById('total'),
-  categoriesElement = d.getElementById('categories'),
-  addExpenseHeader = d.getElementById('add-expense-header'),
+  categoriesElement = d.querySelector('#main-screen main'),
+  addExpenseHeader = d.querySelector('#add-expense-screen header h1'),
   addExpenseCurrentElement = d.getElementById('add-expense-current'),
   addExpenseAmountElement = d.getElementById('add-expense-amount');
 
