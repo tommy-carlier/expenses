@@ -128,6 +128,7 @@ function renderEditCategory(c){
   
   name.value = c.name;
   
+  deleteButton.type = 'button';
   deleteButton.className = 'delete';
   deleteButton.appendChild(d.createTextNode('Delete'));
   
@@ -150,6 +151,17 @@ function renderEditCategories(){
 function onEditCategories(){
   renderEditCategories();
   showScreen('edit-categories');
+}
+
+function onDeleteCategory(e){
+  var t = e.target;
+  if (t.tagName == 'BUTTON' && t.className == 'delete' && !t.disabled){
+    t.disabled = true;
+    t = t.parentElement; // LI
+    t.className = 'deleted';
+    t = t.getElementsByTagName('INPUT')[0];
+    t.readOnly = true;
+  }
 }
 
 function onClearExpenses(){
@@ -188,6 +200,7 @@ renderCategories();
 
 // event handlers
 categoriesElement.addEventListener('click', onAddExpense);
+editCategoriesElement.addEventListener('click', onDeleteCategory);
 
 d.getElementById('add-category').addEventListener('click', onAddCategory);
 d.getElementById('edit-categories').addEventListener('click', onEditCategories);
