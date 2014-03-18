@@ -122,6 +122,7 @@ function onAddCategory(){
 }
 
 function renderEditCategory(c){
+  try {
   var item = d.createElement('LI'),
     name = d.createElement('INPUT'),
     deleteButton = d.createElement('BUTTON');
@@ -136,6 +137,9 @@ function renderEditCategory(c){
   item.appendChild(deleteButton);
   
   return item;
+  } catch(e) {
+    alert(e);
+  }
 }
 
 function renderEditCategories(){
