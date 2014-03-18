@@ -122,14 +122,12 @@ function onAddCategory(){
 }
 
 function renderEditCategory(c){
-  try {
   var item = d.createElement('LI'),
     name = d.createElement('INPUT'),
     deleteButton = d.createElement('BUTTON');
   
   name.value = c.name;
   
-  deleteButton.type = 'button';
   deleteButton.className = 'delete';
   deleteButton.appendChild(d.createTextNode('Delete'));
   
@@ -137,9 +135,6 @@ function renderEditCategory(c){
   item.appendChild(deleteButton);
   
   return item;
-  } catch(e) {
-    alert(e);
-  }
 }
 
 function renderEditCategories(){
@@ -160,6 +155,7 @@ function onEditCategories(){
 function onDeleteCategory(e){
   var t = e.target;
   if (t.tagName == 'BUTTON' && t.className == 'delete' && !t.disabled){
+    e.preventDefault();
     t.disabled = true;
     t = t.parentElement; // LI
     t.className = 'deleted';
