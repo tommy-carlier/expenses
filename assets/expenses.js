@@ -186,7 +186,19 @@ function onSubmitAddExpenseForm(e){
 
 function onSubmitEditCategoriesForm(e){
   e.preventDefault();
-  alert('Editing categories is not implemented yet. Sorry.');
+  var items = editCategoriesElement.getElementsByTagName('LI');
+  for (var i = items.length; i--; ) {
+    var item = items[i];
+    if (item.className == 'deleted') {
+      categories.splice(i, 1);
+    } else {
+      var name = item.getElementsByTagName('INPUT')[0].value;
+      if (name.length > 0) {
+        categories[i].name = name;
+      }
+    }
+  }
+  update();
   showScreen('main');
 }
 
