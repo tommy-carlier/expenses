@@ -196,8 +196,8 @@ function onSubmitAddExpenseForm(e){
     
     update();
   }
-  addExpenseAmountElement.blur();
   showScreen('main');
+  categoriesElement.focus();
 }
 
 function onSubmitEditCategoriesForm(e){
