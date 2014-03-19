@@ -7,7 +7,8 @@ var categories = [], d = document, current = -1,
   editCategoriesElement = d.querySelector('#edit-categories-screen main'),
   addExpenseHeader = d.querySelector('#add-expense-screen header h1'),
   addExpenseCurrentElement = d.getElementById('add-expense-current'),
-  addExpenseAmountElement = d.getElementById('add-expense-amount');
+  addExpenseAmountElement = d.getElementById('add-expense-amount'),
+  addExpenseDescriptionElement = d.getElementById('add-expense-description');
 
 function load(){
   if (window.localStorage && window.JSON){
@@ -15,6 +16,13 @@ function load(){
     if (s){
       try {
         categories = JSON.parse(s);
+        
+        for (var i = 0, n = categories.length; i < n; i++){
+          var c = categories[i];
+          if (!('details' in c)){
+            c.details = [];
+          }
+        }
       } catch(e) { /* parsing failed */ }
     }
   }
@@ -98,6 +106,7 @@ function showAddExpenseScreen(c){
   addExpenseHeader.firstChild.textContent = c.name;
   addExpenseCurrentElement.firstChild.textContent = formatAmount(c.amount);
   addExpenseAmountElement.value = '';
+  addExpenseDescriptionElement.value = '';
   showScreen('add-expense');
   addExpenseAmountElement.focus();
 }
@@ -116,7 +125,7 @@ function onAddExpense(e){
 function onAddCategory(){
   var name = prompt('What is the name of the category?');
   if (name){
-    categories.push({ name: name, amount: 0.0 });
+    categories.push({ name: name, amount: 0.0, details: [] });
     update();
   }
 }
@@ -177,7 +186,14 @@ function onSubmitAddExpenseForm(e){
   e.preventDefault();
   var expense = parseAmount(addExpenseAmountElement.value);
   if (!isNaN(expense)){
-    categories[current].amount += expense;
+    var c = categories[current];
+    c.amount += expense;
+    
+    var description = addExpenseDescriptionElement.value;
+    if (description.length){
+      c.details.push(description + ' (' + formatAmount(expense) + ')');
+    }
+    
     update();
   }
   addExpenseAmountElement.blur();
