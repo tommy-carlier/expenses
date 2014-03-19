@@ -196,7 +196,8 @@ function onSubmitAddExpenseForm(e){
     
     update();
   }
-  document.activeElement.blur();
+  addExpenseAmountElement.blur();
+  addExpenseDescriptionElement.blur()
   showScreen('main');
 }
 
@@ -215,7 +216,6 @@ function onSubmitEditCategoriesForm(e){
     }
   }
   update();
-  document.activeElement.blur();
   showScreen('main');
 }
 
