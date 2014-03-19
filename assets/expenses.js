@@ -196,8 +196,8 @@ function onSubmitAddExpenseForm(e){
     
     update();
   }
+  document.activeElement.blur();
   showScreen('main');
-  categoriesElement.focus();
 }
 
 function onSubmitEditCategoriesForm(e){
@@ -215,6 +215,7 @@ function onSubmitEditCategoriesForm(e){
     }
   }
   update();
+  document.activeElement.blur();
   showScreen('main');
 }
 
