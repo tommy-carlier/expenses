@@ -8,7 +8,8 @@ var categories = [], d = document, current = -1,
   addExpenseHeader = d.querySelector('#add-expense-screen header h1'),
   addExpenseCurrentElement = d.getElementById('add-expense-current'),
   addExpenseAmountElement = d.getElementById('add-expense-amount'),
-  addExpenseDescriptionElement = d.getElementById('add-expense-description');
+  addExpenseDescriptionElement = d.getElementById('add-expense-description'),
+  addExpenseHistoryElement = d.getElementById('add-expense-history');
 
 function load(){
   if (window.localStorage && window.JSON){
@@ -107,6 +108,22 @@ function showAddExpenseScreen(c){
   addExpenseCurrentElement.firstChild.textContent = formatAmount(c.amount);
   addExpenseAmountElement.value = '';
   addExpenseDescriptionElement.value = '';
+  
+  while (addExpenseHistoryElement.hasChildNodes()){
+    addExpenseHistoryElement.removeChild(addExpenseHistoryElement.firstChild);
+  }
+  
+  var details = c.details;
+  if (details.length){
+    var f = d.createDocumentFragment();
+    for (var i = 0, n = details.length; i < n; i++){
+      var e = d.createElement('SMALL');
+      e.appendChild(d.createTextNode(details[i]));
+      f.appendChild(e);
+    }
+    addExpenseHistoryElement.appendChild(f);
+  }
+  
   showScreen('add-expense');
   addExpenseAmountElement.focus();
 }
