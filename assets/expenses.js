@@ -193,7 +193,9 @@ function onDeleteCategory(e){
 function onClearExpenses(){
   if (confirm('Are you sure you want to clear all expenses?')){
     for (var i = 0, n = categories.length; i < n; i++){
-      categories[i].amount = 0.0;
+      var c = categories[i];
+      c.amount = 0.0;
+      c.details = [];
     }
     update();
   }
@@ -213,8 +215,7 @@ function onSubmitAddExpenseForm(e){
     
     update();
   }
-  addExpenseAmountElement.blur();
-  addExpenseDescriptionElement.blur()
+  d.activeElement.blur();
   showScreen('main');
 }
 
@@ -233,6 +234,7 @@ function onSubmitEditCategoriesForm(e){
     }
   }
   update();
+  d.activeElement.blur();
   showScreen('main');
 }
 
