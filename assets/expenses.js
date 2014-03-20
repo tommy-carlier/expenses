@@ -1,7 +1,7 @@
 (function(){
 "use strict";
 
-var categories = [], d = document, current = -1,
+var d = document, current = -1,
   totalElement = d.getElementById('total'),
   categoriesElement = d.querySelector('#main-screen main'),
   editCategoriesElement = d.querySelector('#edit-categories-screen main'),
@@ -10,32 +10,6 @@ var categories = [], d = document, current = -1,
   addExpenseAmountElement = d.getElementById('add-expense-amount'),
   addExpenseDescriptionElement = d.getElementById('add-expense-description'),
   addExpenseHistoryElement = d.getElementById('add-expense-history');
-
-function load(){
-  if (window.localStorage && window.JSON){
-    var s = localStorage['expenses.categories'];
-    if (s){
-      try {
-        categories = JSON.parse(s);
-        
-        for (var i = 0, n = categories.length; i < n; i++){
-          var c = categories[i];
-          if (!('details' in c)){
-            c.details = [];
-          }
-        }
-      } catch(e) { /* parsing failed */ }
-    }
-  }
-}
-
-function save(){
-  if (window.localStorage && window.JSON){
-    try {
-      localStorage.setItem('expenses.categories', JSON.stringify(categories));
-    } catch(e) { /* storage failed */ }
-  }
-}
 
 function parseAmount(s){
   if (/\d+(?:[.,]\d+)?/.test(s)){
@@ -71,8 +45,8 @@ function renderCategory(c){
 
 function renderCategories(){
   var list = d.createElement('UL'), total = 0.0;
-  for (var i = 0, n = categories.length; i < n; i++){
-    var c = categories[i];
+  for (var i=0, n=data.categoryCount(); i<n; i++){
+    var c = data.getCategory(i);
     total += c.amount;
     list.appendChild(renderCategory(c));
   }
@@ -84,11 +58,6 @@ function renderCategories(){
   if (~~total){
     totalElement.appendChild(d.createTextNode(' (' + formatAmount(total) + ')'));
   }
-}
-
-function update(){
-  renderCategories();
-  save();
 }
 
 function showScreen(s){
@@ -135,15 +104,15 @@ function onAddExpense(e){
   }
   if (t.tagName == 'LI'){
     current = getIndex(t);
-    showAddExpenseScreen(categories[current]);
+    showAddExpenseScreen(data.getCategory(current));
   }
 }
 
 function onAddCategory(){
   var name = prompt('What is the name of the category?');
   if (name){
-    categories.push({ name: name, amount: 0.0, details: [] });
-    update();
+    data.addCategory(name);
+    renderCategories();
   }
 }
 
@@ -165,8 +134,8 @@ function renderEditCategory(c){
 
 function renderEditCategories(){
   var list = d.createElement('UL');
-  for (var i = 0, n = categories.length; i < n; i++){
-    var c = categories[i];
+  for (var i=0, n=data.categoryCount(); i<n; i++){
+    var c = data.getCategory(i);
     list.appendChild(renderEditCategory(c));
   }
   
@@ -192,12 +161,8 @@ function onDeleteCategory(e){
 
 function onClearExpenses(){
   if (confirm('Are you sure you want to clear all expenses?')){
-    for (var i = 0, n = categories.length; i < n; i++){
-      var c = categories[i];
-      c.amount = 0.0;
-      c.details = [];
-    }
-    update();
+    data.clearExpenses();
+    renderCategories();
   }
 }
 
@@ -205,15 +170,13 @@ function onSubmitAddExpenseForm(e){
   e.preventDefault();
   var expense = parseAmount(addExpenseAmountElement.value);
   if (!isNaN(expense)){
-    var c = categories[current];
-    c.amount += expense;
-    
     var description = addExpenseDescriptionElement.value;
     if (description.length){
-      c.details.push(description + ' (' + formatAmount(expense) + ')');
+      description += ' (' + formatAmount(expense) + ')';
     }
     
-    update();
+    data.addExpense(current, expense, description);
+    renderCategories();
   }
   d.activeElement.blur();
   showScreen('main');
@@ -221,21 +184,26 @@ function onSubmitAddExpenseForm(e){
 
 function onSubmitEditCategoriesForm(e){
   e.preventDefault();
-  var items = editCategoriesElement.getElementsByTagName('LI');
-  for (var i = items.length; i--; ) {
-    var item = items[i];
-    if (item.className == 'deleted') {
-      categories.splice(i, 1);
-    } else {
-      var name = item.getElementsByTagName('INPUT')[0].value;
-      if (name.length > 0) {
-        categories[i].name = name;
+  data.beginBatch();
+  try{
+    var items = editCategoriesElement.getElementsByTagName('LI');
+    for (var i = items.length; i--; ) {
+      var item = items[i];
+      if (item.className == 'deleted') {
+        data.removeCategory(i);
+      } else {
+        var name = item.getElementsByTagName('INPUT')[0].value;
+        if (name.length > 0) {
+          data.renameCategory(i, name);
+        }
       }
     }
+  } finally {
+    data.endBatch();
+    renderCategories();
+    d.activeElement.blur();
+    showScreen('main');
   }
-  update();
-  d.activeElement.blur();
-  showScreen('main');
 }
 
 function onBackToMainScreen(e){
@@ -243,7 +211,6 @@ function onBackToMainScreen(e){
   showScreen('main');
 }
 
-load();
 renderCategories();
 
 // event handlers

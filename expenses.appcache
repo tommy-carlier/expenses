@@ -1,9 +1,10 @@
 CACHE MANIFEST
-#201403200852
+#201403201312
 
 CACHE:
 expenses.html
 assets/expenses.css
+assets/data.js
 assets/expenses.js
 assets/icon-152.png
 assets/favicon.ico
