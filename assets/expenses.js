@@ -1,8 +1,6 @@
 (function(){
 "use strict";
 
-window.onerror = function(e){ alert(e); }
-
 var d = document, current = -1,
   totalElement = d.getElementById('total'),
   categoriesElement = d.querySelector('#main-screen main'),
