@@ -6,14 +6,16 @@ body { color:#000; background:#FFF }
 h1 { font-size:14pt; text-align:center }
 
 input+button { margin-left:0.5em }
-button { margin:0.5em 0.3em; padding:0.1em 1em; border-radius:1.5em; border:none; background:#70A5BE; color:#FFF }
+button { margin:0.5em 0.3em; padding:0.1em 1em; border-radius:1.5em; border:none; background:#70A5BE; color:#FFF; -webkit-tap-highlight-color:transparent }
+button:active { background:#92BDD1 }
 
 #total { font-weight:normal }
 
 .screen { display:none; position:relative; max-width:800px; margin:0 auto }
 .screen header, .screen main, .screen footer { display:table-row }
 .screen header button { position:absolute; top:1px; margin:0; font-size:10pt }
-button.back { left:0; top:2px !important; background:none; color:#70A5BE }
+button.back { left:0; top:2px !important; background:none; border-radius:0.5em; color:#70A5BE }
+button.back:active { background:#D5E9F2 }
 .screen header button[type=submit] { right:0 }
 .screen main { height:100% }
 .screen footer { text-align:center }
