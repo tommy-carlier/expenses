@@ -213,6 +213,9 @@ function onBackToMainScreen(e){
 
 renderCategories();
 
+// enables CSS active pseudo-class styles on buttons
+d.addEventListener('touchstart', function(){}, false);
+
 // event handlers
 categoriesElement.addEventListener('click', onAddExpense);
 editCategoriesElement.addEventListener('click', onDeleteCategory);
