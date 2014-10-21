@@ -229,5 +229,7 @@ d.querySelector('#add-expense-screen button.back').addEventListener('click', onB
 
 d.getElementById('edit-categories-screen').addEventListener('submit', onSubmitEditCategoriesForm);
 d.querySelector('#edit-categories-screen button.back').addEventListener('click', onBackToMainScreen);
+  
+showScreen('main');
 
 }())

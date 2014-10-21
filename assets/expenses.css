@@ -21,9 +21,12 @@ button.back:active { background:#D5E9F2 }
 .screen footer { text-align:center }
 .screen footer button { font-size:13pt }
 
+[data-screen=intro] #intro-screen,
 [data-screen=main] #main-screen,
 [data-screen=add-expense] #add-expense-screen,
 [data-screen=edit-categories] #edit-categories-screen { display:table }
+
+#intro-screen p { display:table-cell; vertical-align:middle; text-align:center }
 
 #main-screen main { -webkit-tap-highlight-color:transparent }
 #main-screen ul { display:table; width:100% }
